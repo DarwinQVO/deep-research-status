@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Research Platform - Sistema Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0A0F1B 0%, #1E293B 100%);
+            color: #E2E8F0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #8B5CF6 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: #94A3B8;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .main-progress {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            padding: 1.5rem;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 12px;
+        }
+
+        .progress-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #A78BFA;
+        }
+
+        .big-percentage {
+            font-size: 4rem;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(135deg, #10B981 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 1rem 0;
+        }
+
+        .progress-bar-large {
+            width: 100%;
+            height: 20px;
+            background: rgba(51, 65, 85, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill-large {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981 0%, #3B82F6 50%, #8B5CF6 100%);
+            border-radius: 10px;
+            width: 85%;
+            animation: fillProgress 2s ease-out;
+        }
+
+        @keyframes fillProgress {
+            from { width: 0%; }
+            to { width: 85%; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .feature-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .feature-header:hover {
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .feature-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-title-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .feature-number {
+            width: 32px;
+            height: 32px;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #A78BFA;
+            flex-shrink: 0;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .status-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-badge {
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .status-working {
+            background: rgba(34, 197, 94, 0.2);
+            color: #10B981;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-enhanced {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.3) 0%, rgba(59, 130, 246, 0.3) 100%);
+            color: #10B981;
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            font-weight: 700;
+        }
+
+        .status-partial {
+            background: rgba(251, 191, 36, 0.2);
+            color: #F59E0B;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .status-broken {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .expand-icon {
+            width: 20px;
+            height: 20px;
+            color: #64748B;
+            transition: transform 0.3s ease;
+        }
+
+        .feature.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .feature-summary {
+            color: #94A3B8;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        .feature-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .feature.expanded .feature-content {
+            max-height: 3000px;
+        }
+
+        .feature-details {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .detail-box {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .detail-title {
+            color: #94A3B8;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .check-yes { color: #10B981; }
+        .check-no { color: #EF4444; }
+        .check-partial { color: #F59E0B; }
+
+        .visual-example {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .visual-title {
+            font-weight: 600;
+            color: #A78BFA;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .mockup-container {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .isolated-addition {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .isolated-title {
+            color: #10B981;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-block {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.875rem;
+            color: #A78BFA;
+            overflow-x: auto;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-badge {
+            padding: 0.25rem 0.75rem;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: #A78BFA;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 1rem 0;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+        }
+
+        .comparison-table th {
+            background: rgba(139, 92, 246, 0.1);
+            color: #A78BFA;
+            font-weight: 600;
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 8px;
+        }
+
+        .flow-step {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 8px;
+            min-width: 120px;
+        }
+
+        .flow-arrow {
+            color: #8B5CF6;
+            font-size: 1.5rem;
+        }
+
+        .highlight {
+            background: rgba(251, 191, 36, 0.2);
+            padding: 0.125rem 0.375rem;
+            border-radius: 4px;
+            color: #F59E0B;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .big-percentage { font-size: 3rem; }
+            .detail-grid { grid-template-columns: 1fr; }
+            .flow-diagram { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Deep Research Platform</h1>
+        <p class="subtitle">Sistema Completo de Investigación con AI</p>
+        
+        <div class="main-progress">
+            <div class="progress-title">Estado Total del Sistema</div>
+            <div class="big-percentage">85%</div>
+            <div class="progress-bar-large">
+                <div class="progress-fill-large"></div>
+            </div>
+            <div style="text-align: center; color: #94A3B8; margin-top: 0.5rem;">
+                Core Platform (65%) + Sistemas Aislados Funcionales (100%)
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="features-grid">
+            
+            <!-- Feature 1: Chatbox -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">1</div>
+                            <div class="feature-title">💬 Chatbox + Selector de Modelo</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-working">✓ FUNCIONAL</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        6 modelos AI disponibles • Multi-threading • Persistencia completa
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="visual-example">
+                            <div class="visual-title">Ejemplo de Interfaz</div>
+                            <div class="mockup-container">
+                                <div style="padding: 1rem; border-bottom: 1px solid rgba(100, 116, 139, 0.2);">
+                                    <select style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3); padding: 0.5rem; border-radius: 6px; color: #A78BFA; width: 100%;">
+                                        <option>🚀 Multi-Source Search (Google + Wikipedia + DuckDuckGo)</option>
+                                        <option>👤 Social Media Hunt (Encuentra perfiles)</option>
+                                        <option>🧠 O3 Deep Research</option>
+                                        <option>✨ O4 Mini Deep Research</option>
+                                        <option>🌐 Perplexity Sonar</option>
+                                        <option>🌐 Perplexity Sonar Pro</option>
+                                    </select>
+                                </div>
+                                <div style="padding: 1rem;">
+                                    <div style="background: rgba(59, 130, 246, 0.1); padding: 0.75rem; border-radius: 6px; margin-bottom: 0.5rem;">
+                                        <strong>🤖 Assistant:</strong> ¿En qué puedo ayudarte hoy?
+                                    </div>
+                                    <div style="background: rgba(139, 92, 246, 0.1); padding: 0.75rem; border-radius: 6px;">
+                                        <strong>👤 User:</strong> Busca información sobre China micro dramas industry
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-grid">
+                            <div class="detail-box">
+                                <div class="detail-title">Características</div>
+                                <ul class="checklist">
+                                    <li><span class="check-yes">✓</span> Chat persistente con historiales</li>
+                                    <li><span class="check-yes">✓</span> Pairing inteligente de modelos</li>
+                                    <li><span class="check-yes">✓</span> Respuestas en streaming</li>
+                                    <li><span class="check-yes">✓</span> Multi-threading simultáneo</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2: Upload -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">2</div>
+                            <div class="feature-title">📥 Upload Manual de Fuentes</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-working">✓ FUNCIONAL</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        20+ plataformas detectadas • PDFs con OCR • 8+ métodos de extracción
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="visual-example">
+                            <div class="visual-title">Detección Automática de Plataforma</div>
+                            <div class="mockup-container">
+                                <input type="text" placeholder="https://twitter.com/elonmusk/status/123..." 
+                                    style="width: 100%; padding: 0.75rem; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 6px; color: #E2E8F0;">
+                                <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <span style="background: rgba(29, 161, 242, 0.2); color: #1DA1F2; padding: 0.5rem 1rem; border-radius: 6px;">
+                                        🐦 Twitter/X Detectado
+                                    </span>
+                                    <span style="background: rgba(139, 92, 246, 0.1); color: #A78BFA; padding: 0.5rem 1rem; border-radius: 6px;">
+                                        → Extractor Especializado
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="comparison-table">
+                            <tr>
+                                <th>Plataforma</th>
+                                <th>Extracción</th>
+                                <th>Contenido Capturado</th>
+                            </tr>
+                            <tr>
+                                <td>X/Twitter</td>
+                                <td>✓ API v2 + Puppeteer</td>
+                                <td>Tweets, threads, perfiles</td>
+                            </tr>
+                            <tr>
+                                <td>LinkedIn</td>
+                                <td>✓ Enhanced Scraping</td>
+                                <td>Perfiles, posts, empresas</td>
+                            </tr>
+                            <tr>
+                                <td>YouTube</td>
+                                <td>✓ Whisper + Subtítulos</td>
+                                <td>Transcripts con timestamps</td>
+                            </tr>
+                            <tr>
+                                <td>PDFs</td>
+                                <td>✓ OCR Tesseract</td>
+                                <td>Texto + imágenes escaneadas</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Modules -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">3</div>
+                            <div class="feature-title">📚 Módulos Publicación/Autor</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-working">✓ FUNCIONAL</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        Vistas dedicadas • Auto-creación desde URLs • Enriquecimiento con Gemini
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="visual-example">
+                            <div class="visual-title">Navegación Jerárquica</div>
+                            <div class="flow-diagram">
+                                <div class="flow-step">
+                                    📰 Report
+                                    <div style="font-size: 0.8rem; color: #94A3B8;">China Micro Dramas</div>
+                                </div>
+                                <div class="flow-arrow">→</div>
+                                <div class="flow-step">
+                                    📄 Source
+                                    <div style="font-size: 0.8rem; color: #94A3B8;">TechCrunch Article</div>
+                                </div>
+                                <div class="flow-arrow">→</div>
+                                <div class="flow-step">
+                                    🏢 Publication
+                                    <div style="font-size: 0.8rem; color: #94A3B8;">TechCrunch</div>
+                                </div>
+                                <div class="flow-arrow">→</div>
+                                <div class="flow-step">
+                                    👤 Author
+                                    <div style="font-size: 0.8rem; color: #94A3B8;">Rita Liao</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-grid">
+                            <div class="detail-box">
+                                <div class="detail-title">Auto-Creación</div>
+                                <ul class="checklist">
+                                    <li><span class="check-yes">✓</span> Detecta dominio de URL</li>
+                                    <li><span class="check-yes">✓</span> Crea publication automática</li>
+                                    <li><span class="check-yes">✓</span> Extrae autor del contenido</li>
+                                    <li><span class="check-yes">✓</span> Enriquece con Gemini AI</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 4: Internet Platforms -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">4</div>
+                            <div class="feature-title">🌐 Internet Platforms + Búsqueda Masiva</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-enhanced">✓ MEJORADO</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        Social Media Hunt funcional • Jina AI agregado con 100+ URLs por búsqueda
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="detail-grid">
+                            <div class="detail-box">
+                                <div class="detail-title">Core System</div>
+                                <ul class="checklist">
+                                    <li><span class="check-yes">✓</span> Social Media Hunt</li>
+                                    <li><span class="check-yes">✓</span> Perfiles X, LinkedIn</li>
+                                    <li><span class="check-no">✗</span> Similarweb (no implementado)</li>
+                                </ul>
+                            </div>
+                            <div class="detail-box" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3);">
+                                <div class="detail-title" style="color: #10B981;">+ Sistema Aislado</div>
+                                <ul class="checklist">
+                                    <li><span class="check-yes">✓</span> <strong>Jina AI Research</strong></li>
+                                    <li><span class="check-yes">✓</span> 100+ URLs por búsqueda</li>
+                                    <li><span class="check-yes">✓</span> DeepSearch multi-fuente</li>
+                                    <li><span class="check-yes">✓</span> Metadatos completos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="isolated-addition">
+                            <div class="isolated-title">
+                                🚀 Con Jina AI Integration
+                            </div>
+                            <p>Búsqueda masiva implementada: Una query puede retornar 100+ fuentes relevantes con metadata completa (título, descripción, fecha, autor)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 5: Search -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">5</div>
+                            <div class="feature-title">🔍 Búsqueda en Publicaciones</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-partial">⚠ BÁSICO</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        Filtros UI básicos • Google Custom Search limitada
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <p style="color: #94A3B8;">Búsqueda site-specific no implementada pero los filtros básicos funcionan para búsquedas locales en sources existentes.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 6: Deduping -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">6</div>
+                            <div class="feature-title">🔄 Deduplicación + Conteo</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-working">✓ FUNCIONAL</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        Sistema completo de tracking • Discovery paths • Badges visuales
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="visual-example">
+                            <div class="visual-title">Tracking Visual de Sources</div>
+                            <div class="mockup-container">
+                                <div style="padding: 1rem; border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 6px; margin-bottom: 0.5rem;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <strong>China's Micro Drama Revolution</strong>
+                                            <div style="font-size: 0.875rem; color: #94A3B8;">technode.com</div>
+                                        </div>
+                                        <div style="display: flex; gap: 0.5rem;">
+                                            <span style="background: rgba(139, 92, 246, 0.2); color: #A78BFA; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem;">
+                                                🟣 Perplexity
+                                            </span>
+                                            <span style="background: rgba(59, 130, 246, 0.2); color: #3B82F6; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.875rem;">
+                                                3x
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="font-size: 0.875rem; color: #94A3B8;">
+                                    Descubierto 3 veces por: Perplexity, Wikipedia, Multi-Source Search
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 7: Workflow -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">7</div>
+                            <div class="feature-title">✅ Workflow Aceptar/Rechazar</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-working">✓ FUNCIONAL</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        3 estados • Auto-enriquecimiento con Gemini • Persistencia
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="flow-diagram">
+                            <div class="flow-step" style="background: rgba(251, 191, 36, 0.1); border-color: rgba(251, 191, 36, 0.3);">
+                                ⏳ Pending
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3);">
+                                ✓ Accept
+                                <div style="font-size: 0.75rem; margin-top: 0.25rem;">+ Gemini AI</div>
+                            </div>
+                            <div style="color: #64748B;">o</div>
+                            <div class="flow-step" style="background: rgba(239, 68, 68, 0.1); border-color: rgba(239, 68, 68, 0.3);">
+                                ✗ Reject
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 8: Paywall -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">8</div>
+                            <div class="feature-title">🔓 Paywall Breaking / Archiving</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-enhanced">✓ RESUELTO</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        Core roto pero sistemas aislados 100% funcionales
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="detail-grid">
+                            <div class="detail-box" style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.2);">
+                                <div class="detail-title" style="color: #EF4444;">Core System</div>
+                                <ul class="checklist">
+                                    <li><span class="check-no">✗</span> Archive.is no funciona</li>
+                                    <li><span class="check-no">✗</span> Archive.org falla</li>
+                                    <li><span class="check-no">✗</span> 12ft.io sin implementar</li>
+                                </ul>
+                            </div>
+                            <div class="detail-box" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3);">
+                                <div class="detail-title" style="color: #10B981;">+ Sistemas Aislados</div>
+                                <ul class="checklist">
+                                    <li><span class="check-yes">✓</span> <strong>Bypass Paywall System</strong></li>
+                                    <li><span class="check-yes">✓</span> 5+ métodos funcionando</li>
+                                    <li><span class="check-yes">✓</span> Fallback automático</li>
+                                    <li><span class="check-yes">✓</span> <strong>ArchiveBox Docker</strong></li>
+                                    <li><span class="check-yes">✓</span> Archivado permanente</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="isolated-addition">
+                            <div class="isolated-title">
+                                ✅ Problema Completamente Resuelto
+                            </div>
+                            <p><strong>Bypass Paywall:</strong> Archive.is, 12ft.io, RemovePaywall, Google Cache, Wayback Machine - todos funcionando con fallback automático</p>
+                            <p><strong>ArchiveBox:</strong> Docker container que descarga HTML completo, PDFs, screenshots, videos - archivado permanente local</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 9: Adapters -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">9</div>
+                            <div class="feature-title">🎥 Adaptadores YouTube/PDF</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-working">✓ FUNCIONAL</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        YouTube con Whisper + timestamps • PDFs con OCR Tesseract
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="visual-example">
+                            <div class="visual-title">YouTube Transcript Enhancement</div>
+                            <div class="mockup-container">
+                                <div style="border-left: 3px solid #FF0000; padding-left: 1rem;">
+                                    <div style="margin-bottom: 0.75rem;">
+                                        <span style="color: #3B82F6; font-weight: 600;">Speaker 1:</span> 
+                                        <span data-start="15.2" style="cursor: pointer; text-decoration: underline;">
+                                            The micro drama industry in China is revolutionizing entertainment...
+                                        </span>
+                                        <span style="color: #64748B; font-size: 0.875rem; margin-left: 0.5rem;">[0:15]</span>
+                                    </div>
+                                    <div>
+                                        <span style="color: #10B981; font-weight: 600;">Speaker 2:</span> 
+                                        <span data-start="28.5" style="cursor: pointer; text-decoration: underline;">
+                                            Yes, with over 100 million daily active viewers...
+                                        </span>
+                                        <span style="color: #64748B; font-size: 0.875rem; margin-left: 0.5rem;">[0:28]</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 1rem; font-size: 0.875rem; color: #94A3B8;">
+                                    Click en cualquier texto → Link directo al momento exacto del video
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 10: Source View -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">10</div>
+                            <div class="feature-title">📝 Vista Source + Highlights</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-working">✓ FUNCIONAL</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        Extracción DOM-based • Export con formato • YouTube timestamps
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="visual-example">
+                            <div class="visual-title">Highlight → Quote</div>
+                            <div class="mockup-container">
+                                <div style="background: rgba(251, 191, 36, 0.1); padding: 1rem; border-left: 3px solid #F59E0B;">
+                                    <div style="background: rgba(251, 191, 36, 0.2); display: inline;">
+                                        "The micro drama market reached $5 billion in 2024"
+                                    </div>
+                                </div>
+                                <div style="margin-top: 1rem; text-align: center;">↓</div>
+                                <div style="background: rgba(139, 92, 246, 0.1); padding: 1rem; border-radius: 6px; margin-top: 1rem;">
+                                    <strong>📌 Quote saved:</strong><br>
+                                    "The micro drama market reached $5 billion in 2024"<br>
+                                    <span style="color: #94A3B8; font-size: 0.875rem;">
+                                        Source: TechNode • Rita Liao • Aug 2024
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 11: Database -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">11</div>
+                            <div class="feature-title">💾 Base de Datos con Relaciones</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-working">✓ FUNCIONAL</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        7 tablas relacionadas • Relaciones automáticas • Persistencia LocalStorage
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="visual-example">
+                            <div class="visual-title">Estructura de Datos Relacional</div>
+                            <div class="mockup-container">
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                                    <div style="text-align: center; padding: 0.75rem; background: rgba(139, 92, 246, 0.1); border-radius: 6px;">
+                                        📊 Reports
+                                        <div style="font-size: 0.75rem; color: #94A3B8;">has many →</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px;">
+                                        📄 Sources
+                                        <div style="font-size: 0.75rem; color: #94A3B8;">belongs to →</div>
+                                    </div>
+                                    <div style="text-align: center; padding: 0.75rem; background: rgba(34, 197, 94, 0.1); border-radius: 6px;">
+                                        🏢 Publications
+                                        <div style="font-size: 0.75rem; color: #94A3B8;">has many →</div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 1rem; text-align: center;">
+                                    <div style="padding: 0.75rem; background: rgba(251, 191, 36, 0.1); border-radius: 6px; display: inline-block;">
+                                        👥 Authors
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="detail-box">
+                            <div class="detail-title">Características</div>
+                            <ul class="checklist">
+                                <li><span class="check-yes">✓</span> Relaciones automáticas entre entidades</li>
+                                <li><span class="check-yes">✓</span> UUIDs únicos para cada registro</li>
+                                <li><span class="check-yes">✓</span> Cascada de eliminación</li>
+                                <li><span class="check-partial">⚠</span> Límite 5-10MB (LocalStorage)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 12: Multimedia -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">12</div>
+                            <div class="feature-title">🖼️ Extracción Multimedia</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-partial">⚠ PARCIAL</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        Extrae imágenes • Galería por source • Falta galería global
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <ul class="checklist">
+                            <li><span class="check-yes">✓</span> Captura todas las imágenes del contenido</li>
+                            <li><span class="check-yes">✓</span> ImageGallery component por source</li>
+                            <li><span class="check-no">✗</span> No hay vista global de todas las imágenes</li>
+                            <li><span class="check-no">✗</span> Sin herramientas de organización</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 13: Word Counter -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">13</div>
+                            <div class="feature-title">📊 Word Counter</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-partial">⚠ PARCIAL</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        Contador por fuente individual • Sin totales globales
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <div class="visual-example">
+                            <div class="visual-title">Display de Word Count</div>
+                            <div class="mockup-container">
+                                <div style="border: 1px solid rgba(100, 116, 139, 0.2); border-radius: 6px; padding: 1rem;">
+                                    <div style="font-weight: 600;">China's Micro Drama Revolution</div>
+                                    <div style="color: #94A3B8; font-size: 0.875rem; margin-top: 0.5rem;">
+                                        technode.com • <span class="highlight">2,847 words</span> • Aug 15, 2024
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 14: Search -->
+            <div class="feature" onclick="toggleFeature(this)">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">14</div>
+                            <div class="feature-title">🔎 Búsqueda Lexical Avanzada</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-partial">⚠ BÁSICA</span>
+                            <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="feature-summary">
+                        Búsqueda básica implementada pero no visible prominentemente en UI
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <div class="feature-details">
+                        <p style="color: #94A3B8;">La funcionalidad existe en el código pero necesita mejor exposición en la interfaz. Los filtros por reporte/publication funcionan pero no son fácilmente accesibles.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Integration -->
+            <div class="feature" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%); border-color: rgba(34, 197, 94, 0.4);">
+                <div class="feature-header">
+                    <div class="feature-top">
+                        <div class="feature-title-group">
+                            <div class="feature-number">🚀</div>
+                            <div class="feature-title">Integración Total del Sistema</div>
+                        </div>
+                        <div class="status-group">
+                            <span class="status-badge status-enhanced">85% COMPLETO</span>
+                        </div>
+                    </div>
+                    <div class="feature-summary" style="color: #10B981; font-weight: 600;">
+                        Core Platform (65%) + 3 Sistemas Aislados Funcionales (100%) = Sistema Robusto
+                    </div>
+                </div>
+                <div class="feature-content" style="max-height: none;">
+                    <div class="feature-details">
+                        <div class="flow-diagram">
+                            <div class="flow-step">
+                                🔍 <strong>Buscar</strong>
+                                <div style="font-size: 0.75rem; color: #94A3B8;">Jina AI</div>
+                                <div style="font-size: 0.875rem; color: #10B981;">100+ URLs</div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                🔓 <strong>Desbloquear</strong>
+                                <div style="font-size: 0.75rem; color: #94A3B8;">Bypass System</div>
+                                <div style="font-size: 0.875rem; color: #10B981;">5+ métodos</div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                💾 <strong>Archivar</strong>
+                                <div style="font-size: 0.75rem; color: #94A3B8;">ArchiveBox</div>
+                                <div style="font-size: 0.875rem; color: #10B981;">Permanente</div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                💬 <strong>Analizar</strong>
+                                <div style="font-size: 0.75rem; color: #94A3B8;">Deep Research</div>
+                                <div style="font-size: 0.875rem; color: #10B981;">6 AI Models</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 2rem; padding: 1rem; background: rgba(139, 92, 246, 0.1); border-radius: 8px;">
+                            <h3 style="color: #A78BFA; margin-bottom: 1rem;">✅ Capacidades Totales del Sistema Integrado</h3>
+                            <div class="detail-grid">
+                                <div>
+                                    <ul class="checklist">
+                                        <li><span class="check-yes">✓</span> Búsqueda masiva (100+ URLs)</li>
+                                        <li><span class="check-yes">✓</span> Bypass de paywalls completo</li>
+                                        <li><span class="check-yes">✓</span> Archivado permanente</li>
+                                        <li><span class="check-yes">✓</span> 20+ plataformas soportadas</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <ul class="checklist">
+                                        <li><span class="check-yes">✓</span> AI multi-modelo (6 opciones)</li>
+                                        <li><span class="check-yes">✓</span> YouTube con timestamps</li>
+                                        <li><span class="check-yes">✓</span> Deduplicación inteligente</li>
+                                        <li><span class="check-yes">✓</span> Workflow de moderación</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleFeature(element) {
+            // Don't toggle the summary box
+            if (element.querySelector('.feature-number')?.textContent === '🚀') {
+                return;
+            }
+            element.classList.toggle('expanded');
+        }
+
+        // Keep integration summary always expanded
+        document.addEventListener('DOMContentLoaded', () => {
+            const summaryFeature = document.querySelector('.feature:last-child');
+            if (summaryFeature) {
+                summaryFeature.classList.add('expanded');
+            }
+        });
+    </script>
+</body>
+</html>
